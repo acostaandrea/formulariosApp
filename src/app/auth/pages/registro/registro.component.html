@@ -20,8 +20,17 @@
                 <label class="col-sm-3 col-form-label">Email</label>
                 <div class="col-sm-9">
                     <input type="email" class="form-control" formControlName="email" placeholder="Email del usuario">
-                    <span class="form-text text-danger" *ngIf="camnpoNoValido('email')">
+                    <!-- <span class="form-text text-danger" *ngIf="emailRequired()">
                         El correo es obligatorio
+                    </span>
+                    <span class="form-text text-danger" *ngIf="emailFormato()">
+                        El valor ingresado no tiene formato de correo.
+                    </span>
+                    <span class="form-text text-danger" *ngIf="emailTomado()">
+                        El email ya fue tomado.
+                    </span> -->
+                    <span class="form-text text-danger" *ngIf="camnpoNoValido('email')">
+                        {{emailErrorMsg}}
                     </span>
                 </div>
 
@@ -35,6 +44,7 @@
                     <span class="form-text text-danger" *ngIf="camnpoNoValido('username')">
                         El username no puede ser strider
                     </span>
+                    
                 </div>
 
 
@@ -66,7 +76,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <button class="btn btn-primary float-end" type="submit">
+                    <button class="btn btn-primary float-end" type="submit" [disabled]="miFormulario.pending">
                         Crear
                     </button>
                 </div>
@@ -76,6 +86,8 @@
 </div>
 
 <h5>Form valid: {{miFormulario.valid}}</h5>
+<h5>Form status: {{miFormulario.status}}</h5>
+<h5>Form pending: {{miFormulario.pending}}</h5>
 <h5>Form errors </h5>
 <pre>{{miFormulario.errors |json}}</pre>
 
